@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nuevoauth
+    app: nuevita-authh
   managedFields:
     - apiVersion: apps/v1
       fieldsType: FieldsV1
@@ -88,7 +88,7 @@ metadata:
               "f:terminationGracePeriodSeconds": {}
       manager: GoogleCloudConsole
       operation: Update
-      time: "2022-12-22T22:48:42Z"
+      time: "2022-12-24T04:11:24Z"
     - apiVersion: apps/v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -123,14 +123,14 @@ metadata:
       manager: kube-controller-manager
       operation: Update
       subresource: status
-      time: "2022-12-22T22:49:10Z"
-  name: nuevoauth
-  namespace: default-10
+      time: "2022-12-24T04:11:55Z"
+  name: nuevita-authh
+  namespace: default
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nuevoauth
+      app: nuevita-authh
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -139,7 +139,7 @@ spec:
   template:
     metadata:
       labels:
-        app: nuevoauth
+        app: nuevita-authh
     spec:
       containers:
         - env:
@@ -147,37 +147,37 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: BD_NAME
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
             - name: SERVER
               valueFrom:
                 configMapKeyRef:
                   key: SERVER
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
             - name: PORT
               valueFrom:
                 configMapKeyRef:
                   key: PORT
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
             - name: USER
               valueFrom:
                 configMapKeyRef:
                   key: USER
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
             - name: PASSWORD
               valueFrom:
                 configMapKeyRef:
                   key: PASSWORD
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
             - name: SERVER_PORT
               valueFrom:
                 configMapKeyRef:
                   key: SERVER_PORT
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
             - name: SECRET_JWT
               valueFrom:
                 configMapKeyRef:
                   key: SECRET_JWT
-                  name: nuevoauth-config-deft
+                  name: nuevita-authh-config-v2ma
           image: gcr.io/encoded-aspect-371604/github.com/huamanangel/borr
           imagePullPolicy: IfNotPresent
           name: borr-1
@@ -186,7 +186,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app: nuevoauth
+    app: nuevita-authh
   managedFields:
     - apiVersion: autoscaling/v2
       fieldsType: FieldsV1
@@ -205,7 +205,7 @@ metadata:
             "f:name": {}
       manager: GoogleCloudConsole
       operation: Update
-      time: "2022-12-22T22:48:42Z"
+      time: "2022-12-24T04:11:24Z"
     - apiVersion: autoscaling/v2
       fieldsType: FieldsV1
       fieldsV1:
@@ -239,9 +239,9 @@ metadata:
       manager: vpa-recommender
       operation: Update
       subresource: status
-      time: "2022-12-22T22:48:59Z"
-  name: nuevoauth-hpa-8bku
-  namespace: default-10
+      time: "2022-12-24T04:11:41Z"
+  name: nuevita-authh-hpa-yncr
+  namespace: default
 spec:
   maxReplicas: 5
   metrics:
@@ -255,7 +255,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: nuevoauth
+    name: nuevita-authh
 ---
 apiVersion: v1
 kind: Service
@@ -265,7 +265,7 @@ metadata:
   finalizers:
     - service.kubernetes.io/load-balancer-cleanup
   labels:
-    app: nuevoauth
+    app: nuevita-authh
   managedFields:
     - apiVersion: v1
       fieldsType: FieldsV1
@@ -290,7 +290,7 @@ metadata:
           "f:type": {}
       manager: GoogleCloudConsole
       operation: Update
-      time: "2022-12-22T22:59:07Z"
+      time: "2022-12-24T04:21:26Z"
     - apiVersion: v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -304,25 +304,25 @@ metadata:
       manager: kube-controller-manager
       operation: Update
       subresource: status
-      time: "2022-12-22T22:59:52Z"
-  name: nuevoauth-service
-  namespace: default-10
+      time: "2022-12-24T04:22:14Z"
+  name: nuevita-authh-service
+  namespace: default
 spec:
   allocateLoadBalancerNodePorts: true
-  clusterIP: 10.28.16.198
+  clusterIP: 10.28.22.147
   clusterIPs:
-    - 10.28.16.198
+    - 10.28.22.147
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-    - nodePort: 30272
+    - nodePort: 30765
       port: 80
       protocol: TCP
       targetPort: 4000
   selector:
-    app: nuevoauth
+    app: nuevita-authh
   sessionAffinity: None
   type: LoadBalancer
